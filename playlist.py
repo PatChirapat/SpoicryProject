@@ -2,6 +2,7 @@ import json
 import random
 import os
 import time
+import webbrowser
 from song import Song
 Song = Song("", "", "", [])
 
@@ -48,7 +49,7 @@ class Playlist:
         msg = "Shuffling..."
         for i in range(len(msg)):
             print(msg[i], end='')
-            time.sleep(0.3)
+            time.sleep(0.2)
         time.sleep(0.5)
         print()
         for _ in range(len(Song.conclude_info())):
@@ -61,8 +62,16 @@ class Playlist:
         save = {
             self.name: Song.conclude_info()
         }
-        with open("playlist.json", "w") as file:
-            json.dump(save, file, indent=4)
+        try:
+            with open("playlist.json", "r") as file:
+                data = json.load(file)
+                data.update(save)
+        except FileNotFoundError:
+            with open("playlist.json", "w") as file:
+                json.dump(save, file, indent=4)
+        else:
+            with open("playlist.json", "w") as file:
+                json.dump(data, file, indent=4)
 
     @staticmethod
     def respectively_playlist():
@@ -70,7 +79,7 @@ class Playlist:
         msg = "Respectively..."
         for i in range(len(msg)):
             print(msg[i], end='')
-            time.sleep(0.3)
+            time.sleep(0.2)
         time.sleep(0.5)
         print()
         for _ in range(len(Song.conclude_info())):
@@ -78,7 +87,21 @@ class Playlist:
             print(f"{_+1} : {Song.conclude_info()[_][0]} by"
                   f" {Song.conclude_info()[_][1]}")
 
-    def playlist_run(self):
+    def explode_playlist(self):
+        """open songs in playlist that previously saved"""
+        with open("playlist.json", "r") as file:
+            data = json.load(file)
+            for _ in data.values():
+                for __ in _:
+                    webbrowser.open_new_tab(__[2])
+
+    def clear_database(self):
+        """Clear database"""
+        with open("playlist.json", "w") as file:
+            json.dump({}, file, indent=4)
+        print("Database cleared successfully!")
+
+    def playlist_successfully(self):
         """Select function for playlist then it will run"""
         self.create_playlist()
         while True:
@@ -88,7 +111,7 @@ class Playlist:
             print("3. Shuffle playlist")
             print("4. Respectively playlist")
             print("5. Show all song")
-            print("6. Exit")
+            print("6. Save playlist")
             print("============================================")
             choice = int(input("What do you want to do? "))
             if choice == 1:
@@ -121,7 +144,7 @@ class Playlist:
         msg = "Loading..."
         for i in range(len(msg)):
             print(msg[i], end='')
-            time.sleep(0.3)
+            time.sleep(0.2)
         time.sleep(0.3)
         self.save_playlist()
         print()
@@ -132,3 +155,33 @@ class Playlist:
                 for __ in _:
                     print(f"{__[0]}: {__[1]}")
                     time.sleep(0.5)
+
+    def playlist_run(self):
+        """Select function for playlist then it will run"""
+        while True:
+            print("============================================")
+            print("1. Create playlist")
+            print("2. Load playlist")
+            print("3. Exit")
+            print("============================================")
+            choice = int(input("What do you want to do? "))
+            if choice == 1:
+                self.playlist_successfully()
+                time.sleep(1)
+                os.system("clear")
+            elif choice == 2:
+                if self.name == "":
+                    print("Playlist not found!")
+                    time.sleep(1)
+                    os.system("clear")
+                else:
+                    self.explode_playlist()
+                    time.sleep(1)
+                    os.system("clear")
+            elif choice == 3:
+                self.clear_database()
+                break
+            else:
+                print("Invalid choice!")
+                time.sleep(1)
+                os.system("clear")

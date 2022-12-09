@@ -2,8 +2,6 @@ from song import Song
 from playlist import Playlist
 import ascii_saved
 import time
-
-
 Song = Song("", "", "", [])
 Playlist = Playlist("")
 
