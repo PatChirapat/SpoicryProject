@@ -17,6 +17,7 @@ class Playlist:
         create_playlist: create a playlist
         playlist_run: select function for playlist
     """
+
     def __init__(self, name: str):
         """Initialize a playlist
 
@@ -54,7 +55,7 @@ class Playlist:
         print()
         for _ in range(len(Song.conclude_info())):
             time.sleep(0.5)
-            print(f"{_+1} : {Song.conclude_info()[_][0]} by"
+            print(f"{_ + 1} : {Song.conclude_info()[_][0]} by"
                   f" {Song.conclude_info()[_][1]}")
 
     def save_playlist(self):
@@ -84,10 +85,11 @@ class Playlist:
         print()
         for _ in range(len(Song.conclude_info())):
             time.sleep(0.5)
-            print(f"{_+1} : {Song.conclude_info()[_][0]} by"
+            print(f"{_ + 1} : {Song.conclude_info()[_][0]} by"
                   f" {Song.conclude_info()[_][1]}")
 
-    def explode_playlist(self):
+    @staticmethod
+    def explode_playlist():
         """open songs in playlist that previously saved"""
         with open("playlist.json", "r") as file:
             data = json.load(file)
@@ -95,14 +97,28 @@ class Playlist:
                 for __ in _:
                     webbrowser.open_new_tab(__[2])
 
-    def clear_database(self):
+    @staticmethod
+    def clear_database():
         """Clear database"""
         with open("playlist.json", "w") as file:
             json.dump({}, file, indent=4)
         print("Database cleared successfully!")
 
+    @staticmethod
+    def del_specific_playlist():
+        """Delete specific playlist"""
+        with open("playlist.json", "r") as file:
+            data = json.load(file)
+            for _ in data.keys():
+                print(_)
+            del_name = input("Enter name of playlist: ")
+            data.pop(del_name)
+        with open("playlist.json", "w") as file:
+            json.dump(data, file, indent=4)
+        print("Playlist deleted successfully!")
+
     def playlist_successfully(self):
-        """Select function for playlist then it will run"""
+        """Select function to make your playlist """
         self.create_playlist()
         while True:
             print("============================================")
@@ -151,10 +167,11 @@ class Playlist:
         print(f"Playlist {self.name} saved successfully!")
         with open("playlist.json", "r") as file:
             data = json.load(file)
-            for _ in data.values():
-                for __ in _:
-                    print(f"{__[0]}: {__[1]}")
-                    time.sleep(0.5)
+            l = []
+            for i in data:
+                l.append(i)
+            print(f"new update >>> {l[-1]} : {data[l[-1]]}")
+        Song.info_list = []
 
     def playlist_run(self):
         """Select function for playlist then it will run"""
@@ -162,7 +179,9 @@ class Playlist:
             print("============================================")
             print("1. Create playlist")
             print("2. Load playlist")
-            print("3. Exit")
+            print("3. Delete playlist")
+            print("4. Show all playlist")
+            print("5. Exit")
             print("============================================")
             choice = int(input("What do you want to do? "))
             if choice == 1:
@@ -179,7 +198,44 @@ class Playlist:
                     time.sleep(1)
                     os.system("clear")
             elif choice == 3:
-                self.clear_database()
+                print("Select mode to delete playlist")
+                time.sleep(1)
+                os.system("clear")
+                while True:
+                    print("============================================")
+                    print("1. Delete all playlist")
+                    print("2. Delete specific playlist")
+                    print("============================================")
+                    choice = int(input("What do you want to do? "))
+                    if choice == 1:
+                        self.clear_database()
+                        time.sleep(1)
+                        os.system("clear")
+                        break
+                    elif choice == 2:
+                        self.del_specific_playlist()
+                        time.sleep(1)
+                        os.system("clear")
+                        break
+                    else:
+                        print("Invalid choice!")
+                        time.sleep(1)
+                        os.system("clear")
+            elif choice == 4:
+                if self.name == "":
+                    print("Playlist not found!")
+                    time.sleep(1)
+                    os.system("clear")
+                else:
+                    with open("playlist.json", "r") as file:
+                        data = json.load(file)
+                        print("This is all of your playlist!")
+                        for k, v in data.items():
+                            print(f"Playlist {k} : {v}")
+                    time.sleep(1)
+                    os.system("clear")
+            elif choice == 5:
+                print("Thanks for using Spoticry!")
                 break
             else:
                 print("Invalid choice!")
