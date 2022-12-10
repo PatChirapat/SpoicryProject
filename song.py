@@ -70,7 +70,7 @@ class Song:
             self.info_list.append([self.title, self.artist, self.url])
             print(f"{self.title} added successfully!")
         else:
-            print("This song already exists!")
+            print("This song already exist!")
 
     def song_delete(self):
         """Delete a song"""
