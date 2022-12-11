@@ -1,5 +1,11 @@
 # Project: Spoticry
 
+GitHub link:
+
+```
+https://github.com/PatChirapat/SpoticryProject
+```
+
 
 ## Project overview
 Spoticry is an application that you can add songs into your playlist and open your 
