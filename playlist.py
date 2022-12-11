@@ -18,10 +18,9 @@ class Playlist:
         create_playlist: create a playlist
         shuffle_playlist: shuffle playlist
         respectively_playlist: play playlist
-        explode_playlist: load playlist
+        open_playlist: load playlist
         save_playlist: save playlist to json file
         playlist_successfully: select function to make your playlist
-        playlist_run: select function for playlist then it will run
     """
 
     def __init__(self, name: str):
@@ -109,7 +108,6 @@ class Playlist:
         """Clear database"""
         with open("playlist.json", "w") as file:
             json.dump({}, file, indent=4)
-        print("Database cleared successfully!")
 
     @staticmethod
     def del_specific_playlist():
@@ -169,7 +167,7 @@ class Playlist:
             print(msg[i], end='')
             time.sleep(0.2)
         time.sleep(0.3)
-        self.save_playlist()
+        Playlist.save_playlist(self)
         print()
         print(f"Playlist {self.name} saved successfully!")
         with open("playlist.json", "r") as file:
@@ -179,7 +177,3 @@ class Playlist:
                 l.append(i)
             print(f"new update >>> {l[-1]} : {data[l[-1]]}")
         Song.info_list = []
-
-
-# x = Playlist("")
-# x.playlist_run()

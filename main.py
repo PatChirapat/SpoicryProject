@@ -1,20 +1,24 @@
-from song import Song
 from playlist import Playlist
-from database import Database
 import ascii_saved
 import time
 import os
 import json
-Song = Song("", "", "")
 Playlist = Playlist("")
 
 
 class Main:
+    """Main class use to run the program
 
+    Attributes:
+        -
+
+    Methods:
+        playlist_run: run the program
+    """
     @staticmethod
     def playlist_run():
         """Select function for playlist then it will run"""
-        art_work = ascii_saved.ascii_save()
+        print(ascii_saved.ascii_save())
         time.sleep(1)
         print("If you are sad, we are here for you.")
         time.sleep(1)
@@ -56,12 +60,13 @@ class Main:
                     print("============================================")
                     choice = int(input("What do you want to do? "))
                     if choice == 1:
-                        Database.clear_database()
+                        Playlist.clear_database()
+                        print("Database cleared successfully!")
                         time.sleep(1)
                         os.system("clear")
                         break
                     elif choice == 2:
-                        Database.del_specific_playlist()
+                        Playlist.del_specific_playlist()
                         time.sleep(1)
                         os.system("clear")
                         break
@@ -84,6 +89,7 @@ class Main:
                     os.system("clear")
             elif choice == 5:
                 print("Thanks for using Spoticry!")
+                Playlist.clear_database()
                 break
             else:
                 print("Invalid choice!")
@@ -91,5 +97,5 @@ class Main:
                 os.system("clear")
 
 
-x = Main()
-x.playlist_run()
+if __name__ == '__main__':
+    Main.playlist_run()
