@@ -4,8 +4,7 @@ import os
 import time
 import webbrowser
 from song import Song
-
-Song = Song("", "", "", [])
+Song = Song("", "", "")
 
 
 class Playlist:
@@ -13,10 +12,16 @@ class Playlist:
 
     Attributes:
         name (str): name of playlist
+        song_list (list): list of song
 
     Methods:
         create_playlist: create a playlist
-        playlist_run: select function for playlist
+        shuffle_playlist: shuffle playlist
+        respectively_playlist: play playlist
+        explode_playlist: load playlist
+        save_playlist: save playlist to json file
+        playlist_successfully: select function to make your playlist
+        playlist_run: select function for playlist then it will run
     """
 
     def __init__(self, name: str):
@@ -28,6 +33,7 @@ class Playlist:
             name: str
         """
         self.name = name
+        self.song_list = [Song]  # list of obj
 
     @property
     def name(self):

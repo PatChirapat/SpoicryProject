@@ -9,10 +9,9 @@ class Song:
         song_add: add a song
         song_delete: delete a song
         conclude_info: return info_list
-        export_to_csv: export info_list to csv file
     """
 
-    def __init__(self, title: str, artist: str, url: str, info_list: list):
+    def __init__(self, title: str, artist: str, url: str):
         """Initialize a song
         params:
             title (str): title of song
@@ -29,7 +28,7 @@ class Song:
         self.title = title
         self.artist = artist
         self.url = url
-        self.info_list = info_list
+        self.info_list = []
 
     @property
     def title(self):
