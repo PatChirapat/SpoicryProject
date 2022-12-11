@@ -20,6 +20,7 @@ class Playlist:
         respectively_playlist: play playlist
         open_playlist: load playlist
         save_playlist: save playlist to json file
+        del_specific_playlist: delete specific playlist
         playlist_successfully: select function to make your playlist
     """
 
