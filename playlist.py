@@ -4,6 +4,7 @@ import os
 import time
 import webbrowser
 from song import Song
+
 Song = Song("", "", "", [])
 
 
