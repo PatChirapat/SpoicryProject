@@ -96,7 +96,7 @@ class Playlist:
                   f" {Song.conclude_info()[_][1]}")
 
     @staticmethod
-    def explode_playlist():
+    def open_playlist():
         """open songs in playlist that previously saved"""
         with open("playlist.json", "r") as file:
             data = json.load(file)
@@ -180,71 +180,6 @@ class Playlist:
             print(f"new update >>> {l[-1]} : {data[l[-1]]}")
         Song.info_list = []
 
-    def playlist_run(self):
-        """Select function for playlist then it will run"""
-        while True:
-            print("============================================")
-            print("1. Create playlist")
-            print("2. Load playlist")
-            print("3. Delete playlist")
-            print("4. Show all playlist")
-            print("5. Exit")
-            print("============================================")
-            choice = int(input("What do you want to do? "))
-            if choice == 1:
-                self.playlist_successfully()
-                time.sleep(1)
-                os.system("clear")
-            elif choice == 2:
-                if self.name == "":
-                    print("Playlist not found!")
-                    time.sleep(1)
-                    os.system("clear")
-                else:
-                    self.explode_playlist()
-                    time.sleep(1)
-                    os.system("clear")
-            elif choice == 3:
-                print("Select mode to delete playlist")
-                time.sleep(1)
-                os.system("clear")
-                while True:
-                    print("============================================")
-                    print("1. Delete all playlist")
-                    print("2. Delete specific playlist")
-                    print("============================================")
-                    choice = int(input("What do you want to do? "))
-                    if choice == 1:
-                        self.clear_database()
-                        time.sleep(1)
-                        os.system("clear")
-                        break
-                    elif choice == 2:
-                        self.del_specific_playlist()
-                        time.sleep(1)
-                        os.system("clear")
-                        break
-                    else:
-                        print("Invalid choice!")
-                        time.sleep(1)
-                        os.system("clear")
-            elif choice == 4:
-                if self.name == "":
-                    print("Playlist not found!")
-                    time.sleep(1)
-                    os.system("clear")
-                else:
-                    with open("playlist.json", "r") as file:
-                        data = json.load(file)
-                        print("This is all of your playlist!")
-                        for k, v in data.items():
-                            print(f"Playlist {k} : {v}")
-                    time.sleep(1)
-                    os.system("clear")
-            elif choice == 5:
-                print("Thanks for using Spoticry!")
-                break
-            else:
-                print("Invalid choice!")
-                time.sleep(1)
-                os.system("clear")
+
+# x = Playlist("")
+# x.playlist_run()
