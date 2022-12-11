@@ -88,7 +88,9 @@ eg. cd /Users/patchirapat_/PycharmProjects/COMPRO1_PROJECT/SpoticryProject
 After that, you can run the program by using the command below:
 
 ```
->>> python main.py or python3 main.py
+>>> python main.py 
+or 
+>>> python3 main.py
 ```
 
 
