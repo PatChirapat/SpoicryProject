@@ -65,7 +65,7 @@ to playlist, delete songs from playlist, and return the song's information.
 
 - ascii_saved.py
 
-ascii_saved.py contains the ascii art.
+ascii_saved.py contains the ascii art work.
 
 
 ## How to run the program
@@ -92,5 +92,3 @@ After that, you can run the program by using the command below:
 or 
 >>> python3 main.py
 ```
-
-
